@@ -1,0 +1,8 @@
+fr:
+  home:
+    title: "Bienvenue"
+    subtitle: "Posez vos questions et obtenez des réponses fiables."
+
+  devise:
+    failure:
+      already_authenticated: "Tu es déjà connecté(e)."
