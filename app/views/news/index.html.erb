@@ -1,0 +1,11 @@
+<h2>🔥 Trending Facts 🔥</h2>
+
+<% @news.each do |fact| %>
+
+  <div class="fact-card" style="background-color: <%= fact.trending ? '#f0b7b7' : '#f0f0f0' %>;" >
+    <h3><%= fact.name %></h3>
+    <p>Verdict : <%= fact.verdict %></p>
+    <p>Véracité : <%= fact.truth_percentage %>%</p>
+  </div>
+
+<% end %>
