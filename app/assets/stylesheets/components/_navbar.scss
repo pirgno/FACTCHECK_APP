@@ -1,12 +1,105 @@
 .navbar-lewagon {
   justify-content: space-between;
-  background: white;
+  background: $body-bg;
+  padding: 18px 64px;
+  border-bottom: 1px solid rgba($dark, 0.06);
 }
 
 .navbar-lewagon .navbar-collapse {
   flex-grow: 0;
 }
 
-.navbar-lewagon .navbar-brand img {
-  width: 40px;
+.navbar-lewagon .navbar-nav {
+  align-items: center;
+  gap: 28px;
+}
+
+.navbar-lewagon .nav-link {
+  color: $dark;
+  font-weight: 500;
+  font-size: 15px;
+  position: relative;
+  transition: 0.2s ease;
+}
+
+.navbar-lewagon .nav-link:hover {
+  color: $primary;
+}
+
+.navbar-lewagon .nav-link.active {
+  color: $primary;
+}
+
+.navbar-lewagon .nav-link.active::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  border-radius: 999px;
+  background: $primary;
+}
+
+.factflow-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: $headers-font;
+  font-size: 28px;
+  color: $dark;
+}
+
+.logo-circle {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: $primary;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: $body-font;
+  font-weight: 700;
+}
+
+.navbar-lewagon .btn-flat,
+.navbar-lewagon .nav-link[href="/users/sign_in"] {
+  background: $primary;
+  color: white;
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+.avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid white;
+  box-shadow: 0 6px 18px rgba($dark, 0.15);
+}
+
+.dropdown-menu {
+  border: none;
+  border-radius: 18px;
+  padding: 12px;
+  box-shadow: 0 20px 40px rgba($dark, 0.12);
+}
+
+.dropdown-item {
+  border-radius: 12px;
+  padding: 10px 14px;
+}
+
+.dropdown-item:hover {
+  background: rgba($primary, 0.08);
+  color: $primary;
+}
+
+.navbar-brand img {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
 }

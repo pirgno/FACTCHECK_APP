@@ -1,1 +1,85 @@
-// Specific CSS for your home-page
+.home-hero {
+  min-height: calc(100vh - 90px);
+  padding: 96px 8%;
+  background: $body-bg;
+  display: flex;
+  align-items: center;
+}
+
+.home-hero-content {
+  max-width: 860px;
+}
+
+.hero-badge {
+  display: inline-block;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: rgba($primary, 0.12);
+  color: $primary;
+  font-weight: 700;
+  margin-bottom: 28px;
+}
+
+.home-hero h1 {
+  font-family: $headers-font;
+  font-size: 80px;
+  line-height: 0.98;
+  color: $dark;
+  margin-bottom: 24px;
+}
+
+.home-hero h1 span {
+  color: $primary;
+}
+
+.hero-subtitle {
+  max-width: 620px;
+  font-size: 20px;
+  line-height: 1.6;
+  color: rgba($dark, 0.72);
+  margin-bottom: 40px;
+}
+
+.fake-search-bar {
+  max-width: 720px;
+  background: white;
+  border-radius: 999px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-decoration: none;
+  box-shadow: 0 18px 45px rgba($dark, 0.08);
+  transition: 0.2s ease;
+}
+
+.fake-search-bar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 24px 55px rgba($dark, 0.12);
+}
+
+.search-icon {
+  color: $dark;
+  font-size: 22px;
+  margin-left: 16px;
+}
+
+.fake-placeholder {
+  flex: 1;
+  color: rgba($dark, 0.48);
+  font-size: 16px;
+}
+
+.fake-search-button {
+  background: $primary;
+  color: white;
+  padding: 14px 26px;
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+.login-note {
+  margin-top: 16px;
+  color: rgba($dark, 0.58);
+  font-size: 14px;
+}// Specific CSS for your home-page

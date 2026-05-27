@@ -1,5 +1,25 @@
-<div class="container" >
-  <h1 class="text-center">Fact-checking app</h1>
-<h2 class="text-center">Any doubt about what you've read, heard or seen? </h2>
-<p class="text-center"> 🤖 Ask the bot to clarify! </p>
-</div>
+<section class="home-hero">
+  <div class="home-hero-content">
+    <p class="hero-badge">IA · Vérification instantanée</p>
+
+    <h1>
+      Vérifie les faits.<br>
+      Partage la <span>vérité.</span>
+    </h1>
+
+    <p class="hero-subtitle">
+      factcheck analyse les informations, vérifie les sources
+      et t’aide à distinguer le vrai du faux.
+    </p>
+
+    <%= link_to new_user_session_path, class: "fake-search-bar" do %>
+      <span class="search-icon">⌕</span>
+      <span class="fake-placeholder">Pose ta question ou colle un lien...</span>
+      <span class="fake-search-button">Vérifier</span>
+    <% end %>
+
+    <p class="login-note">
+      Connecte-toi pour lancer une vérification.
+    </p>
+  </div>
+</section>
