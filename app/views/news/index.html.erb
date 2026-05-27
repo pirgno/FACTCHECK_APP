@@ -1,3 +1,44 @@
-<h1>News#index</h1>
-<p>Find me in app/views/news/index.html.erb</p>
- <%= button_to "New chat", chats_path, class: "btn btn-primary" %>
+<div class="container my-5">
+  <%= form_with url: chats_path, method: :post, local: true, class: "search-bar-form" do |f| %>
+    <div class="search-bar">
+      <i class="fas fa-search search-icon"></i>
+      <%= f.text_field :message,
+            placeholder: "CHECK A FACT WITH THE CHATBOT",
+            class: "search-input" %>
+      <button type="submit" class="search-btn">
+        <i class="fas fa-plus"></i>
+      </button>
+    </div>
+  <% end %>
+</div>
+<h2 class="text-center my-4">🔥 Trending News 🔥</h2>
+
+<div class="container">
+  <div class="row g-4">
+    <% @news.each do |fact| %>
+      <div class="col-md-6 col-lg-3">
+        <div class="card fact-card h-100 shadow-sm">
+          <div class="card-body">
+            <% verdict_class = case fact.verdict.to_s.upcase
+                   when "VRAI", "PLUTÔT VRAI" then "bg-success"
+                   when "FAUX", "PLUTÔT FAUX" then "bg-danger"
+                   when "PARTIELLEMENT VRAI", "TROMPEUR" then "bg-warning text-dark"
+                   else "bg-secondary"
+                   end %>
+            <span class="badge <%= verdict_class %> mb-2"><%= fact.verdict %></span>
+            <h5 class="card-title"><%= fact.name %></h5>
+            <p class="card-text small text-muted mb-2">
+              Catégorie : <%= fact.category %>
+            </p>
+            <div class="truth-bar mb-2">
+              <div class="truth-bar-fill" style="width: <%= fact.truth_percentage %>%"></div>
+            </div>
+            <p class="card-text small">
+              Véracité : <strong><%= fact.truth_percentage %>%</strong>
+            </p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
