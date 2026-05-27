@@ -312,8 +312,6 @@ News.create!(
 
 
 
-
-
 # 3. Display a message 🎉
 puts "Finished! Created #{News.count} news."
 
