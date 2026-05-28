@@ -62,11 +62,11 @@
               </p>
 
               <% if message.name.present? %>
-                <h2 class="claim-title"><%= message.name %></h2>
+                <!-- <h2 class="claim-title"><%#= message.name %></h2> -->
               <% end %>
 
               <div class="assistant-content">
-                <%= render_markdown(message.content) %>
+                <%= render_markdown(assistant_message_as_markdown(message)) %>
               </div>
 
               <% if message.origin.present? %>
