@@ -17,7 +17,7 @@
 
           <div class="message-row user-row">
             <div class="message-bubble user-bubble">
-              <%= raw(render_markdown(message.content)) %>
+              <%= render_markdown(message.content) %>
             </div>
           </div>
 
@@ -31,21 +31,60 @@
 
             <div class="assistant-card">
 
-              <div class="fact-status">
-                <span class="status-badge">Plutôt faux</span>
+              <% verdict_class = case message.verdict.to_s.upcase
+                   when "VRAI", "PLUTÔT VRAI" then "bg-success text-white"
+                   when "FAUX", "PLUTÔT FAUX" then "bg-danger text-white"
+                   when "PARTIELLEMENT VRAI" then "bg-warning text-dark"
+                   else "bg-secondary text-white"
+                   end %>
 
-                <div class="confidence-score">
-                  <span>85%</span>
-                  <small>Confiance</small>
+              <div class="fact-header">
+                <div class="fact-meta">
+                  <span class="status-badge <%= verdict_class %>"><%= message.verdict || "NON VÉRIFIABLE" %></span>
+                  <% if message.category.present? %>
+                    <span class="category-pill"><%= message.category %></span>
+                  <% end %>
                 </div>
+
+                <% if message.confidence_level.present? %>
+                  <p class="confidence-note">
+                    Niveau de confiance de l'analyse :
+                    <strong><%= message.confidence_level %></strong>
+                  </p>
+                <% end %>
               </div>
+
+              <div class="truth-bar">
+                <div class="truth-bar-fill" style="width: <%= message.truth_percentage || 0 %>%"></div>
+              </div>
+              <p class="truth-percentage-label">
+                Véracité : <strong><%= message.truth_percentage || 0 %>%</strong>
+              </p>
+
+              <% if message.name.present? %>
+                <h2 class="claim-title"><%= message.name %></h2>
+              <% end %>
 
               <div class="assistant-content">
-                <%= raw(render_markdown(message.content)) %>
+                <%= render_markdown(message.content) %>
               </div>
 
+              <% if message.origin.present? %>
+                <p class="origin-note">
+                  <strong>Origine —</strong> <%= message.origin %>
+                </p>
+              <% end %>
+
+              <% if message.tags&.any? %>
+                <div class="tags-row">
+                  <% message.tags.each do |tag| %>
+                    <span class="tag-chip">#<%= tag %></span>
+                  <% end %>
+                </div>
+              <% end %>
+
               <div class="message-feedback">
-                <span>Cette réponse t’a aidé ?</span>
+                <span>Cette réponse t'a aidé ?</span>
 
                 <div class="feedback-buttons">
                   👍 👎
@@ -84,4 +123,3 @@
   </div>
 
 </div>
-```
