@@ -26,7 +26,7 @@ class ChatsController < ApplicationController
     if @message.save
       ruby_llm_chat = RubyLLM.chat
       response = ruby_llm_chat.with_instructions(SYSTEM_PROMPT).ask(@message.content)
-      Message.create(role: "assistant", content: response.content, chat: @chat)
+      @chat.messages.create(Message.assistant_attributes_from(response.content))
       redirect_to chat_path(@chat)
     else
       render "chats/show", status: :unprocessable_entity
