@@ -1,5 +1,4 @@
 class MessagesController < ApplicationController
-  SYSTEM_PROMPT = "You are a journalist, expert about sciences, politics, history.\n\nI am a user a bit lost about some news, what sources are reliable, what to trust.\n\nHelp me understand if the info I'm sharing with you is trustworthy or not. Insert a % of reliability of the info. Insert sources.\n\nAnswer concisely in Markdown."
 
   def create
     @chat = current_user.chats.find(params[:chat_id])
