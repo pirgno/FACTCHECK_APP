@@ -83,3 +83,73 @@
   color: rgba($dark, 0.58);
   font-size: 14px;
 }// Specific CSS for your home-page
+.search-bar-form {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  background-color: #4a4458;
+  border-radius: 50px;
+  padding: 8px 16px;
+  gap: 12px;
+  transition: box-shadow 0.2s ease;
+
+  &:hover,
+  &:focus-within {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.search-icon {
+  color: white;
+  font-size: 1.2rem;
+  padding-left: 8px;
+}
+
+.search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 14px 8px;
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.8);
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+}
+
+.search-btn {
+  background-color: #ece6f5;
+  border: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #4a4458;
+  font-size: 1.1rem;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+
+  &:hover {
+    background-color: #d8cce8;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}

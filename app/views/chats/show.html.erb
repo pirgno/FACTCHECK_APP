@@ -1,27 +1,87 @@
+<div class="chat-page">
 
-<h1 id="chat_title"><%= @chat.title %></h1>
+  <div class="chat-container">
 
-<div id="messages">
-  <% @chat.messages.each do |message| %>
-    <% if message.role == "user" %>
-      <div class="d-flex justify-content-end mb-2">
-        <div class="bg-white px-3 pb-0 pt-3 rounded-pill">
-          <%= raw(render_markdown(message.content)) %>
-        </div>
+    <div class="chat-header">
+      <div>
+        <p class="chat-badge">Analyse IA</p>
+        <h1><%= @chat.title %></h1>
       </div>
-    <% elsif message.role == "assistant" %>
-      <div class="d-flex justify-content-start mb-5">
-        <div class="px-3 pb-0 pt-3">
-          <%= raw(render_markdown(message.content)) %>
-        </div>
-      </div>
-    <% end %>
-  <% end %>
-</div>
+    </div>
 
-<div id="new_message_container">
-  <%= simple_form_for [@chat, @message] do |f| %>
-    <%= f.input :content, label: "Écris une info à vérifier", required: true, placeholder: "Molière est mort sur scène" %>
-    <%= f.button :submit, 'Demander la vérification', class: 'btn btn-primary' %>
-  <% end %>
+    <div id="messages" class="messages-container">
+
+      <% @chat.messages.each do |message| %>
+
+        <% if message.role == "user" %>
+
+          <div class="message-row user-row">
+            <div class="message-bubble user-bubble">
+              <%= raw(render_markdown(message.content)) %>
+            </div>
+          </div>
+
+        <% elsif message.role == "assistant" %>
+
+          <div class="message-row assistant-row">
+
+            <div class="assistant-avatar">
+              🤖
+            </div>
+
+            <div class="assistant-card">
+
+              <div class="fact-status">
+                <span class="status-badge">Plutôt faux</span>
+
+                <div class="confidence-score">
+                  <span>85%</span>
+                  <small>Confiance</small>
+                </div>
+              </div>
+
+              <div class="assistant-content">
+                <%= raw(render_markdown(message.content)) %>
+              </div>
+
+              <div class="message-feedback">
+                <span>Cette réponse t’a aidé ?</span>
+
+                <div class="feedback-buttons">
+                  👍 👎
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        <% end %>
+
+      <% end %>
+
+    </div>
+
+    <div class="new-message-wrapper">
+
+      <%= simple_form_for [@chat, @message] do |f| %>
+
+        <div class="fake-chat-input">
+
+          <%= f.input :content,
+          label: false,
+          required: true,
+          placeholder: "Pose ta question..." %>
+
+          <%= f.button :submit, "➜", class: "send-button" %>
+
+        </div>
+
+      <% end %>
+
+    </div>
+
+  </div>
+
 </div>
+```
