@@ -64,14 +64,17 @@
 
     <div class="new-message-wrapper">
 
-      <%= simple_form_for [@chat, @message] do |f| %>
+      <%= simple_form_for [@chat, @message], html: {
+        data: { controller: "submit-on-enter" }
+      } do |f| %>
 
         <div class="fake-chat-input">
 
           <%= f.input :content,
           label: false,
           required: true,
-          placeholder: "Pose ta question..." %>
+          placeholder: "Pose ta question...",
+          input_html: { data: { action: "keydown->submit-on-enter#submitOnEnter" } } %>
 
           <%= f.button :submit, "➜", class: "send-button" %>
 
@@ -84,4 +87,3 @@
   </div>
 
 </div>
-```
