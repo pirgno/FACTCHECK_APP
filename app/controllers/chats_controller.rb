@@ -7,14 +7,13 @@ class ChatsController < ApplicationController
   end
 
   def show
-    @chat    = current_user.chats.find(params[:id])
+    @chat = current_user.chats.find(params[:id])
     if params[:message]
       initialize_chat_with_message
     else
       @message = Message.new
     end
   end
-
 
   private
 

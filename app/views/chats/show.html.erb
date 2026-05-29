@@ -83,14 +83,11 @@
                 </div>
               <% end %>
 
-              <div class="message-feedback">
-                <span>Cette réponse t'a aidé ?</span>
-
-                <div class="feedback-buttons">
-                  👍 👎
-                </div>
+              <div class="save-button-wrapper">
+                <%= button_to "Sauvegarder", saved_messages_path,
+                  params: { message_id: message.id },
+                  class: "save-button" %>
               </div>
-
             </div>
 
           </div>
