@@ -16,8 +16,10 @@
 <div class="container">
   <div class="row g-4">
     <% @news.each do |fact| %>
-      <div class="col-md-6 col-lg-3">
-        <div class="card fact-card h-100 shadow-sm">
+
+    <%= link_to news_path(fact), class: "col-3 text-decoration-none" do %>
+      <div class="">
+        <div class="card fact-card h-100">
           <div class="card-body">
             <% verdict_class = case fact.verdict.to_s.upcase
                    when "VRAI", "PLUTÔT VRAI" then "bg-success"
@@ -39,6 +41,8 @@
           </div>
         </div>
       </div>
+    <% end %>
+
     <% end %>
   </div>
 </div>
