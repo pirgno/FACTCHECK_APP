@@ -3,6 +3,11 @@ class SavedMessagesController < ApplicationController
     @saved_messages = current_user.saved_chat_messages.includes(:chat, :news_item)
   end
 
+  def show
+    @saved_message = current_user.saved_messages.find(params[:id])
+    @message = @saved_message.message
+  end
+
   def create
     message = Message.find(params[:message_id])
     if current_user.saved_messages.create(message_id: message.id)
