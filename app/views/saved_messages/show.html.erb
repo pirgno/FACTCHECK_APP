@@ -1,0 +1,92 @@
+<% content_parts = @message.content.to_s.split("## SOURCES") %>
+<% explanation = content_parts[0].to_s.gsub("## EXPLICATION", "").strip %>
+<% sources = content_parts[1].to_s.strip.split("•").reject(&:blank?) %>
+
+<% verdict_class = case @message.verdict.to_s.upcase
+                   when "VRAI", "PLUTÔT VRAI" then "bg-success"
+                   when "FAUX", "PLUTÔT FAUX" then "bg-danger"
+                   when "PARTIELLEMENT VRAI", "TROMPEUR" then "bg-warning text-dark"
+                   else "bg-secondary"
+                   end %>
+
+<div class="container my-5 news-show-page">
+  <%= link_to "← Retour aux actualités", news_index_path, class: "news-back-link" %>
+
+  <div class="row mt-5">
+    <div class="col-12 col-lg-7">
+      <span class="badge rounded-pill <%= verdict_class %> mb-3">
+        <%= @message.verdict || "NON VÉRIFIABLE" %>
+      </span>
+
+      <h1 class="news-show-title"><%= @message.name.presence || "Fact-check sauvegardé" %></h1>
+
+      <% if @message.category.present? %>
+        <p class="news-show-category">
+          Catégorie : <strong><%= @message.category %></strong>
+        </p>
+      <% end %>
+
+      <div class="card news-score-card my-4">
+        <div class="card-body">
+          <p class="mb-1">Véracité</p>
+          <h2><%= @message.truth_percentage || 0 %>%</h2>
+
+          <div class="truth-bar">
+            <div class="truth-bar-fill" style="width: <%= @message.truth_percentage || 0 %>%"></div>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="news-section-title">Résumé</h2>
+
+      <div class="news-content">
+        <%= simple_format(explanation) %>
+      </div>
+
+      <% if sources.any? %>
+        <div class="news-sources-section mt-5">
+          <h2 class="news-section-title">Sources</h2>
+
+          <div class="source-card">
+            <ul class="sources-list">
+              <% sources.each do |source| %>
+                <li><%= source.strip %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="col-12 col-lg-4 offset-lg-1 mt-4 mt-lg-0">
+      <div class="card news-side-card">
+        <div class="card-body">
+          <h2 class="news-section-title">Pourquoi c’est faux ?</h2>
+
+          <div class="news-content">
+            <%= simple_format(explanation) %>
+          </div>
+
+          <div class="news-key-points mt-4">
+            <p>
+              <i class="fa-solid fa-circle-info"></i>
+              <span>Verdict : <strong><%= @message.verdict || "NON VÉRIFIABLE" %></strong></span>
+            </p>
+
+            <p>
+              <i class="fa-solid fa-chart-simple"></i>
+              <span>Véracité : <strong><%= @message.truth_percentage || 0 %>%</strong></span>
+            </p>
+
+            <% if @message.category.present? %>
+              <p>
+                <i class="fa-solid fa-tag"></i>
+                <span>Catégorie : <strong><%= @message.category %></strong></span>
+              </p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
