@@ -27,17 +27,10 @@ class ChatsController < ApplicationController
       ruby_llm_chat = RubyLLM.chat
       response = ruby_llm_chat.with_instructions(SYSTEM_PROMPT).ask(@message.content)
       @chat.messages.create(Message.assistant_attributes_from(response.content))
+      @chat.generate_title_from_first_message
       redirect_to chat_path(@chat)
     else
       render "chats/show", status: :unprocessable_entity
     end
   end
-end
-
-def create
-  @chat = Chat.new(title: "Untitled")
-  response = RubyLLM.chat.with_instructions(instructions).ask(@message.content)
-  Message.create(role: "assistant", content: response.content, chat: @chat)
-  @chat.generate_title_from_first_message
-  @chat.user = current_user
 end
