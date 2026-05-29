@@ -4,17 +4,19 @@ class SavedMessagesController < ApplicationController
   end
 
   def create
-    @saved_message = current_user.saved_messages.new(message_id: params[:message_id])
-    if @saved_message.save
-      redirect_back fallback_location: root_path, success: "Message sauvegardé avec succès."
+    message = Message.find(params[:message_id])
+    if current_user.saved_messages.create(message_id: message.id)
+      redirect_to chat_path(message.chat), notice: "Fact-check sauvegardé !"
     else
-      redirect_back fallback_location: root_path, alert: "Impossible de sauvegarder le message."
+      redirect_to chat_path(message.chat), alert: "Impossible de sauvegarder."
     end
   end
 
   def destroy
-    @saved_message = current_user.saved_messages.find(params[:id])
-    @saved_message.destroy
-    redirect_back fallback_location: root_path, success: "Message supprimé de vos sauvegardes."
+    if current_user.saved_messages.find(params[:id]).destroy
+      redirect_back fallback_location: root_path, flash: { success: "Message supprimé de vos sauvegardes." }
+    else
+      redirect_back fallback_location: root_path, flash: { error: "Impossible de supprimer le message." }
+    end
   end
 end
