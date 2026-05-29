@@ -9,9 +9,7 @@ module ApplicationHelper
       ("# #{message.name}" if message.name.present?),
       assistant_meta_line(message),
       ("**Catégorie :** #{message.category}" if message.category.present?),
-      message.content.presence,
-      ("> **Origine —** #{message.origin}" if message.origin.present?),
-      assistant_tags_line(message)
+      message.content.presence
     ].compact.join("\n\n")
   end
 
@@ -25,9 +23,9 @@ module ApplicationHelper
     meta.join(" — ").presence
   end
 
-  def assistant_tags_line(message)
-    return nil unless message.tags&.any?
+  # def assistant_tags_line(message)
+  #   return nil unless message.tags&.any?
 
-    message.tags.map { |tag| "`##{tag}`" }.join(" ")
-  end
+  #   message.tags.map { |tag| "`##{tag}`" }.join(" ")
+  # end
 end

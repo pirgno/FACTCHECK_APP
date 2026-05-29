@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_28_152125) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_29_083741) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -52,6 +52,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_28_152125) do
     t.integer "truth_percentage"
     t.datetime "updated_at", null: false
     t.string "verdict"
+  end
+
+  create_table "saved_messages", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "message_id", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["message_id"], name: "index_saved_messages_on_message_id"
+    t.index ["user_id"], name: "index_saved_messages_on_user_id"
   end
 
   create_table "solid_cable_messages", force: :cascade do |t|
@@ -211,6 +220,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_28_152125) do
   add_foreign_key "chats", "news"
   add_foreign_key "chats", "users"
   add_foreign_key "messages", "chats"
+  add_foreign_key "saved_messages", "messages"
+  add_foreign_key "saved_messages", "users"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_failed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade

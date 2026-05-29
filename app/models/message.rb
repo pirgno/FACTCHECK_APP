@@ -1,5 +1,7 @@
 class Message < ApplicationRecord
   belongs_to :chat
+  has_many :saved_messages, dependent: :destroy
+  has_many :savers, through: :saved_messages, source: :user
 
   validates :verdict,
     inclusion: { in: News::VERDICTS + ["NON VÉRIFIABLE"] },

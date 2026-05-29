@@ -46,3 +46,51 @@
     <% end %>
   </div>
 </div>
+<div class="container my-5">
+  <h2 class="text-center my-4">📌 Mes sauvegardes</h2>
+
+  <% if @saved_messages.any? %>
+    <div class="row g-4">
+      <% @saved_messages.each do |saved_message| %>
+        <% message = saved_message.message %>
+        <div class="col-md-6 col-lg-3">
+          <div class="card fact-card h-100 shadow-sm">
+            <div class="card-body">
+              <% verdict_class = case message.verdict.to_s.upcase
+                                 when "VRAI", "PLUTÔT VRAI" then "bg-success"
+                                 when "FAUX", "PLUTÔT FAUX" then "bg-danger"
+                                 when "PARTIELLEMENT VRAI", "TROMPEUR" then "bg-warning text-dark"
+                                 else "bg-secondary"
+                                 end %>
+              <span class="badge <%= verdict_class %> mb-2"><%= message.verdict || "NON VÉRIFIABLE" %></span>
+
+              <h5 class="card-title"><%= message.name.presence || "Fact-check sauvegardé" %></h5>
+
+              <% if message.category.present? %>
+                <p class="card-text small text-muted mb-2">
+                  Catégorie : <%= message.category %>
+                </p>
+              <% end %>
+
+              <div class="truth-bar mb-2">
+                <div class="truth-bar-fill" style="width: <%= message.truth_percentage || 0 %>%"></div>
+              </div>
+              <p class="card-text small">
+                Véracité : <strong><%= message.truth_percentage || 0 %>%</strong>
+              </p>
+
+              <%= button_to saved_message_path(saved_message),
+                    method: :delete,
+                    class: "btn btn-sm btn-outline-danger mt-2",
+                    data: { turbo_confirm: "Retirer cette sauvegarde ?" } do %>
+                <i class="fa-solid fa-trash-can"></i>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-center text-muted">Tu n'as pas encore sauvegardé de fact-check.</p>
+  <% end %>
+</div>

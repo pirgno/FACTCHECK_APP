@@ -62,11 +62,11 @@
               </p>
 
               <% if message.name.present? %>
-                <!-- <h2 class="claim-title"><%#= message.name %></h2> -->
+                <h2 class="claim-title"><%= message.name %></h2>
               <% end %>
 
               <div class="assistant-content">
-                <%= render_markdown(assistant_message_as_markdown(message)) %>
+                <%= render_markdown(message.content) %>
               </div>
 
               <% if message.origin.present? %>
@@ -83,14 +83,11 @@
                 </div>
               <% end %>
 
-              <div class="message-feedback">
-                <span>Cette réponse t'a aidé ?</span>
-
-                <div class="feedback-buttons">
-                  👍 👎
-                </div>
+              <div class="save-button-wrapper">
+                <%= button_to "Sauvegarder", saved_messages_path,
+                  params: { message_id: message.id },
+                  class: "save-button" %>
               </div>
-
             </div>
 
           </div>
