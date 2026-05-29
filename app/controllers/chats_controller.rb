@@ -1,5 +1,9 @@
 class ChatsController < ApplicationController
   def create
+    if params[:message].blank?
+      redirect_to news_index_path, alert: "Écris quelque chose pour la vérifier !"
+      return
+    end
     @chat = Chat.new(title: "Untitled")
     @chat.user = current_user
     @chat.save
